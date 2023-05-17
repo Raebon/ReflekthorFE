@@ -3,9 +3,9 @@ import Navbar from "@/components/Navbar";
 import { Toaster } from "@/ui/Toast";
 import "@/styles/globals.css";
 import { Inter } from "next/font/google";
-
 import Providers from "@/components/Providers";
 import { cn } from "@/lib/utils";
+import LoadingPageIndicatior from "@/components/LoadingPageIndicatior";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -47,6 +47,7 @@ export default function RootLayout({
 
       <body className="min-h-screen bg-slate-50 dark:bg-slate-900 antialisased text-slate-900 dark:text-slate-100">
         <Providers>
+          <LoadingPageIndicatior />
           <Toaster position="bottom-right" />
 
           {/* @ts-expect-error Server component*/}
