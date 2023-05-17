@@ -48,14 +48,12 @@ export default MostReadBlog;
 function BlogItem({ data }: { data: PostDto }) {
   const { slug, title, category, publishDate, content, authorName, imagePath } =
     data;
+
   return (
     <Link className="flex gap-3" href={`/posts/${slug}`}>
       <Image
         className="object-cover w-[115px] h-[153px]"
-        src={
-          `https://reflecthorstorage.blob.core.windows.net/images/${imagePath}` ||
-          "/"
-        }
+        src={`https://reflecthorstorage.blob.core.windows.net/images/${imagePath}`}
         width={115}
         height={153}
         alt="test"

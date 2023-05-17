@@ -19,6 +19,32 @@ export default function RootLayout({
       lang="en"
       className={cn("bg-white text-slate-900 antialiased", inter.className)}
     >
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="/static/apple-touch-icon.png"
+      ></link>
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="/static/favicon-32x32.png"
+      ></link>
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/static/favicon-16x16.png"
+      ></link>
+      <link rel="manifest" href="static/site.webmanifest"></link>
+      <link
+        rel="mask-icon"
+        href="/safari-pinned-tab.svg"
+        color="#5bbad5"
+      ></link>
+      <meta name="msapplication-TileColor" content="#000000"></meta>
+      <meta name="theme-color" content="#ffffff"></meta>
+
       <body className="min-h-screen bg-slate-50 dark:bg-slate-900 antialisased text-slate-900 dark:text-slate-100">
         <Providers>
           <Toaster position="bottom-right" />
