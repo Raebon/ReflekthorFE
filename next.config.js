@@ -7,7 +7,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: `${process.env.HOSTNAME_BlOB}`, //todo env
+        hostname: `${process.env.HOSTNAME_BLOB}`, //todo env
         port: "",
         pathname: "/images/**",
       },
