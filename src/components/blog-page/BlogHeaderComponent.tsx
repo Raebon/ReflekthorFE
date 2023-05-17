@@ -20,7 +20,7 @@ const BlogHeaderComponent: FC<BlogHeaderComponentProps> = ({
       <div className="flex gap-5 mb-2">
         <small>{author}</small>
         <small className="font-bold">{publishDate}</small>
-        <small>reading time</small>
+        <small>15 seconds</small>
       </div>
 
       <Heading>{title}</Heading>

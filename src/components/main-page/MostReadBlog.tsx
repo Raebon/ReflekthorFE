@@ -6,6 +6,7 @@ import { useGetBlogsSetupQuery } from "@/utils/api/query/getBlogQueryKey";
 import { formatDistance, subDays } from "date-fns";
 import { Skeleton } from "@/ui/Skeleton";
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
+import Link from "next/link";
 
 interface MostReadBlogProps {
   body: PostsRequest;
@@ -45,17 +46,10 @@ const MostReadBlog: FC<MostReadBlogProps> = ({ body }) => {
 export default MostReadBlog;
 
 function BlogItem({ data }: { data: PostDto }) {
-  const {
-    slug,
-    title,
-    categoryName,
-    publishDate,
-    content,
-    authorName,
-    imagePath,
-  } = data;
+  const { slug, title, category, publishDate, content, authorName, imagePath } =
+    data;
   return (
-    <div className="flex gap-3">
+    <Link className="flex gap-3" href={`/posts/${slug}`}>
       <Image
         className="object-cover w-[115px] h-[153px]"
         src={
@@ -67,12 +61,16 @@ function BlogItem({ data }: { data: PostDto }) {
         alt="test"
       />
       <div className="leading-5 tracking-tight flex flex-col gap-2 py-1">
-        <div className="h-0.5 w-7 bg-orange-600" />
+        <div
+          className={`h-0.5 w-7 ${
+            category?.color ? `bg-${category?.color}` : "bg-sky-500"
+          }`}
+        />
         <span className="text-sm font-semibold">{title}</span>
         <span className="text-sm mt-2">
           {" "}
           {formatDistance(
-            new Date(convertUtcToLocal(publishDate!)),
+            new Date(convertUtcToLocal(publishDate ?? new Date())),
             new Date(),
             {
               includeSeconds: true,
@@ -81,6 +79,6 @@ function BlogItem({ data }: { data: PostDto }) {
           )}
         </span>
       </div>
-    </div>
+    </Link>
   );
 }

@@ -49,15 +49,7 @@ const NewBlogSlider: FC<NewBlogSliderProps> = ({ body }) => {
 export default NewBlogSlider;
 
 function Slide({ data }: { data: PostDto }) {
-  const {
-    slug,
-    title,
-    categoryName,
-    publishDate,
-    content,
-    authorName,
-    imagePath,
-  } = data;
+  const { slug, title, category, publishDate, authorName, imagePath } = data;
   return (
     <>
       <div id="new-blog-image" className="mx-auto flex-none relative">
@@ -74,14 +66,22 @@ function Slide({ data }: { data: PostDto }) {
 
         <div
           id="info"
-          className="absolute w-full left-0 bottom-0 p-5 bg-slate-900/40 flex"
+          className="absolute w-full left-0 bottom-0 p-5 bg-slate-900/50 flex"
         >
-          <div className="w-1 bg-orange-600 mr-2"></div>
+          <div
+            className={`w-1 mr-2 ${
+              category?.color ? `bg-${category?.color}` : "bg-sky-500"
+            }`}
+          ></div>
           <div className="w-full">
             <Link href={`/posts/${slug}`}>
               <div id="new-blog-category">
-                <span className="text-sm md:text-md text-orange-600">
-                  {categoryName}
+                <span
+                  className={`text-sm md:text-md ${
+                    category?.color ? `text-${category?.color}` : "text-sky-500"
+                  }`}
+                >
+                  {category?.name}
                 </span>
                 <span className="text-slate-400 text-sm md:text-md ">
                   {" "}

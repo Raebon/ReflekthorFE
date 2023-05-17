@@ -1,6 +1,6 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-//import { Toaster } from "@/ui/Toast";
+import { Toaster } from "@/ui/Toast";
 import "@/styles/globals.css";
 import { Inter } from "next/font/google";
 
@@ -21,13 +21,11 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-slate-50 dark:bg-slate-900 antialisased text-slate-900 dark:text-slate-100">
         <Providers>
-          {/*  <Toaster position="bottom-right" /> */}
+          <Toaster position="bottom-right" />
 
           {/* @ts-expect-error Server component*/}
           <Navbar />
-          <main className="max-w-5xl mx-auto min-h-[80vh] px-6">
-            {children}
-          </main>
+          <main>{children}</main>
           <Footer />
         </Providers>
         {/* Allow for more height on mobile devices */}

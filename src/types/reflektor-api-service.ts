@@ -8,9 +8,32 @@
 // ReSharper disable InconsistentNaming
 // @ts-nocheck
 
+export interface Category {
+  categoryId?: number;
+  name?: string | undefined;
+  color?: string | undefined;
+  posts?: Post[] | undefined;
+}
+
 export interface CategoryDto {
   categoryId?: number;
   name?: string | undefined;
+  color?: string | undefined;
+}
+
+export interface Comment {
+  commentId?: number;
+  content?: string | undefined;
+  publishDate?: Date;
+  userId?: string;
+  author?: User;
+  postId?: number;
+  post?: Post;
+}
+
+export interface CreateCategoryRequest {
+  name?: string | undefined;
+  color?: string | undefined;
 }
 
 export interface CreatePostRequest {
@@ -41,24 +64,81 @@ export interface LogInRequest {
   password?: string | undefined;
 }
 
+export interface Post {
+  postId?: number;
+  title?: string | undefined;
+  content?: string | undefined;
+  publishDate?: Date | undefined;
+  creationDate?: Date;
+  isPublished?: boolean;
+  slug?: string | undefined;
+  imagePath?: string | undefined;
+  userId?: string;
+  author?: User;
+  categoryId?: number;
+  category?: Category;
+  statistic?: PostStatistic;
+  comments?: Comment[] | undefined;
+  postTags?: PostTag[] | undefined;
+}
+
 export interface PostDto {
   readonly postId?: number;
   title?: string | undefined;
   content?: string | undefined;
   authorId?: string;
   authorName?: string | undefined;
-  publishDate?: Date;
+  publishDate?: Date | undefined;
   isPublished?: boolean;
-  categoryId?: number;
-  categoryName?: string | undefined;
+  creationDate?: Date;
   imagePath?: string | undefined;
   readonly slug?: string | undefined;
+  statistic?: PostStatisticDto;
+  category?: CategoryDto;
+}
+
+export interface PostStatistic {
+  postId?: number;
+  visitCount?: number;
+  shareCount?: number;
+  messageCount?: number;
+  post?: Post;
+}
+
+export interface PostStatisticDto {
+  postId?: number;
+  visitCount?: number;
+  shareCount?: number;
+  messageCount?: number;
+  post?: Post;
+}
+
+export interface PostTag {
+  postId?: number;
+  post?: Post;
+  tagId?: number;
+  tag?: Tag;
 }
 
 export interface PostsRequest {
   skip?: number;
   take?: number;
   sorting?: string | undefined;
+  showOnlyPublished?: boolean;
+  showLatestPosts?: boolean;
+  showMostReadPosts?: boolean;
+}
+
+export interface Tag {
+  tagId?: number;
+  name?: string | undefined;
+  postTags?: PostTag[] | undefined;
+}
+
+export interface UpdateCategoryRequest {
+  categoryId?: number;
+  name?: string | undefined;
+  color?: string | undefined;
 }
 
 export interface UpdatePostRequest {
@@ -73,6 +153,28 @@ export interface UpdatePostRequest {
 export interface UpdateUserRequest {
   firstName?: string | undefined;
   lastName?: string | undefined;
+}
+
+export interface User {
+  id?: string;
+  userName?: string | undefined;
+  normalizedUserName?: string | undefined;
+  email?: string | undefined;
+  normalizedEmail?: string | undefined;
+  emailConfirmed?: boolean;
+  passwordHash?: string | undefined;
+  securityStamp?: string | undefined;
+  concurrencyStamp?: string | undefined;
+  phoneNumber?: string | undefined;
+  phoneNumberConfirmed?: boolean;
+  twoFactorEnabled?: boolean;
+  lockoutEnd?: Date | undefined;
+  lockoutEnabled?: boolean;
+  accessFailedCount?: number;
+  firstName?: string | undefined;
+  lastName?: string | undefined;
+  posts?: Post[] | undefined;
+  comments?: Comment[] | undefined;
 }
 
 export interface UserDto {

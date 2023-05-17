@@ -5,16 +5,22 @@ import {
   type GridColDef,
   DataGrid,
   GridCellParams,
+  GridRowParams,
+  GridActionsCellItem,
 } from "@mui/x-data-grid";
 import { useTheme } from "next-themes";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { PostDto } from "@/types/reflektor-api-service";
+import { formatDatetime } from "@/utils/formatDatetime";
+import { Button } from "@/ui/Button";
+import { Delete, Eye, Pencil } from "lucide-react";
 
 const columnsDraft: GridColDef[] = [
   {
     field: "col0",
     headerName: "",
     width: 5,
+    sortable: false,
     renderCell(params) {
       return (
         <div
@@ -38,16 +44,37 @@ const columnsDraft: GridColDef[] = [
   {
     field: "col2",
     headerName: "Title",
-    width: 400,
-    renderHeader(params) {
-      return (
-        <strong className="font-semibold">{params.colDef.headerName} 📕</strong>
-      );
-    },
+    width: 380,
   },
-  { field: "col3", headerName: "categoryName", width: 150 },
-  { field: "col4", headerName: "authorName", width: 150 },
-  { field: "col5", headerName: "publishDate", width: 150 },
+  { field: "col3", headerName: "Category", width: 150 },
+  { field: "col4", headerName: "Author", width: 150 },
+  { field: "col5", headerName: "Published date", width: 160 },
+  {
+    field: "col6",
+    headerName: "",
+    type: "actions",
+    getActions: (params: GridRowParams) => [
+      <GridActionsCellItem icon={<Eye />} label="Visit blog" showInMenu />,
+      <GridActionsCellItem icon={<Pencil />} label="Edit" showInMenu />,
+      <GridActionsCellItem icon={<Delete />} label="Delete" showInMenu />,
+    ],
+    /*     width: 500, */
+    /*  renderCell(params) {
+      return (
+        <div className="space-x-2 w-full">
+          <Button>
+            <Eye className="w-7" />
+          </Button>
+          <Button>
+            <Eye className="w-7" />
+          </Button>
+          <Button>
+            <Eye className="w-7" />
+          </Button>
+        </div>
+      );
+    }, */
+  },
 ];
 
 const columns = columnsDraft.map((col) => {
@@ -86,9 +113,9 @@ const DashboardPostGrid: FC<DashboardPostGridProps> = ({ posts }) => {
     col0: request.isPublished,
     col1: request.slug,
     col2: request.title,
-    col3: request.categoryName,
+    col3: request.category?.name,
     col4: request.authorName,
-    col5: request.publishDate,
+    col5: formatDatetime(new Date(request.publishDate!), "P"),
   }));
 
   return (
@@ -98,13 +125,13 @@ const DashboardPostGrid: FC<DashboardPostGridProps> = ({ posts }) => {
           backgroundColor: applicationTheme === "light" ? "white" : "#152238",
           fontSize: "1rem",
         }}
-        pageSizeOptions={[5]}
+        pageSizeOptions={[10]}
         disableRowSelectionOnClick
         autoHeight
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 5,
+              pageSize: 25,
             },
           },
         }}

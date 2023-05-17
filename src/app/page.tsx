@@ -19,35 +19,42 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="py-2">
-      <SelectCategoriesBar />
-      <Suspense fallback={<p>Loading feed...</p>}>
-        <NewBlogSlider
-          body={{
-            skip: 0,
-            take: 5,
-          }}
-        />
-      </Suspense>
-      <div className="w-full h-5" />
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
-        <div className="col-span-3 md:col-span-2 my-2">
-          <h5 className="my-3 text-3xl font-semibold">Latest articles</h5>
-          <NewBlogsGrid
+    <div className="max-w-5xl mx-auto min-h-[80vh] px-6">
+      <div className="py-2">
+        <SelectCategoriesBar />
+        <Suspense fallback={<p>Loading feed...</p>}>
+          <NewBlogSlider
             body={{
               skip: 0,
-              take: 10,
+              take: 5,
+              showOnlyPublished: true,
             }}
           />
-        </div>
-        <div className="w-full my-2">
-          <h5 className="my-3 text-3xl font-semibold">Most read articles</h5>
-          <MostReadBlog
-            body={{
-              skip: 0,
-              take: 10,
-            }}
-          />
+        </Suspense>
+        <div className="w-full h-5" />
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
+          <div className="col-span-3 md:col-span-2 my-2">
+            <h5 className="my-3 text-3xl font-semibold">Latest articles</h5>
+            <NewBlogsGrid
+              body={{
+                skip: 0,
+                take: 10,
+                showOnlyPublished: true,
+                showLatestPosts: true,
+              }}
+            />
+          </div>
+          <div className="w-full my-2">
+            <h5 className="my-3 text-3xl font-semibold">Most read articles</h5>
+            <MostReadBlog
+              body={{
+                skip: 0,
+                take: 10,
+                showOnlyPublished: true,
+                showMostReadPosts: true,
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -59,20 +59,6 @@ const SignInButton: FC<SignInButtonProps> = ({}) => {
       setIsLoading(false);
     }
   };
-
-  /*   const signInWithGoogle = async () => {
-    try {
-      setIsLoading(true);
-      await signIn("credentials");
-    } catch (error) {
-       toast({
-        title: "Error signing in",
-        message: "Please try again later.",
-        type: "error",
-      });
-    }
-  }; */
-
   return (
     <Dialog>
       <DialogTrigger asChild>

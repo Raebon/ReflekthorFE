@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default async function Dashboard() {
   const session = await getServerSession(authOptions);
   return (
-    <section className="shadow-md rounded-[0.185rem]">
+    <section className="mt-2">
       <DashboardNavBar token={session.accessToken.accessToken} />
     </section>
   );

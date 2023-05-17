@@ -5,7 +5,6 @@ import { NextResponse } from "next/server";
 export default withAuth(
   async function middleware(req) {
     const pathname = req.nextUrl.pathname; // relative path
-    console.log(req);
     // Manage route protection
     const token = await getToken({ req });
     const isAuth = !!token;

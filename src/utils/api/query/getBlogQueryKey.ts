@@ -1,7 +1,6 @@
 import { PostsRequest, PostDto } from "@/types/reflektor-api-service";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import axios, { AxiosResponse } from "axios";
-import { getToken } from "next-auth/jwt";
 
 /* Get blogs */
 export const getBlogQueryKeyPrefix = "blog-posts";
@@ -37,7 +36,6 @@ export const useGetBlogsSetupQuery = (
 /* Get blog object from slug */
 export const getBlogBySlugQueryKeyPrefix = "blog-post";
 async function getBlogBySlug(body: string) {
-  console.log(body);
   try {
     const response: AxiosResponse<PostDto> = await axios.get(`/blogs/${body}`);
     return response.data;
@@ -59,8 +57,13 @@ export const getBlogBySlugSetupQuery = (body: string) => {
 export const useGetBlogBySlugSetupQuery = (
   body: string
 ): UseQueryResult<PostDto> => {
-  console.log(body);
-  return useQuery(getBlogBySlugQueryKey(body), () =>
-    getBlogBySlugSetupQuery(body)
+  return useQuery(
+    getBlogBySlugQueryKey(body),
+    () => getBlogBySlugSetupQuery(body),
+    {
+      retryOnMount: false,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+    }
   );
 };

@@ -8,7 +8,7 @@ interface DashboardPostsProps {}
 
 const body: PostsRequest = {
   skip: 0,
-  take: 10,
+  take: 100,
 };
 
 const DashboardPosts: FC<DashboardPostsProps> = ({}) => {

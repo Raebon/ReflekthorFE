@@ -7,7 +7,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "reflecthorstorage.blob.core.windows.net",
+        hostname: `${process.env.HOSTNAME_BlOB}`, //todo env
         port: "",
         pathname: "/images/**",
       },
@@ -17,22 +17,23 @@ const nextConfig = {
     return [
       {
         source: "/users/profile",
-        destination:
-          "https://reflekthorappservice.azurewebsites.net/users/profile",
+        destination: `${process.env.API_URL}users/profile`,
       },
       {
         source: "/blogs/posts",
-        destination:
-          "https://reflekthorappservice.azurewebsites.net/blogs/posts",
+        destination: `${process.env.API_URL}blogs/posts`,
+      },
+      {
+        source: "/blogs/categories",
+        destination: `${process.env.API_URL}blogs/categories`,
       },
       {
         source: "/blogs",
-        destination: "https://reflekthorappservice.azurewebsites.net/blogs",
+        destination: `${process.env.API_URL}blogs`,
       },
       {
         source: "/blogs/:slug",
-        destination:
-          "https://reflekthorappservice.azurewebsites.net/blogs/:slug",
+        destination: `${process.env.API_URL}blogs/:slug`,
       },
     ];
   },

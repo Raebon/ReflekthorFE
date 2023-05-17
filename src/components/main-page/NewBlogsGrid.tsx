@@ -6,6 +6,7 @@ import { formatDistance, subDays } from "date-fns";
 import { useGetBlogsSetupQuery } from "@/utils/api/query/getBlogQueryKey";
 import { Skeleton } from "@/ui/Skeleton";
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
+import Link from "next/link";
 interface BlogGridProps {
   body: PostsRequest;
 }
@@ -38,17 +39,10 @@ export default NewBlogsGrid;
 
 function BlogItem({ data }: { data: PostDto }) {
   const img = "/car-wash-detailing-station.jpg";
-  const {
-    slug,
-    title,
-    categoryName,
-    publishDate,
-    content,
-    authorName,
-    imagePath,
-  } = data;
+  const { slug, title, category, publishDate, content, authorName, imagePath } =
+    data;
   return (
-    <div className="flex flex-col">
+    <Link href={`/posts/${slug}`} className="flex flex-col">
       <Image
         className="w-full h-[188px]"
         src={
@@ -62,12 +56,16 @@ function BlogItem({ data }: { data: PostDto }) {
       <div className="leading-5 tracking-tight flex flex-col mt-2">
         <span className="text-sm font-semibold">{title}</span>
         <span className="text-sm text-start mt-1">
-          {formatDistance(convertUtcToLocal(publishDate!), new Date(), {
-            includeSeconds: true,
-            addSuffix: true,
-          })}
+          {formatDistance(
+            convertUtcToLocal(publishDate ?? new Date()),
+            new Date(),
+            {
+              includeSeconds: true,
+              addSuffix: true,
+            }
+          )}
         </span>
       </div>
-    </div>
+    </Link>
   );
 }
