@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import Providers from "@/components/Providers";
 import { cn } from "@/lib/utils";
 import LoadingPageIndicatior from "@/components/LoadingPageIndicatior";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -47,7 +48,13 @@ export default function RootLayout({
 
       <body className="min-h-screen bg-slate-50 dark:bg-slate-900 antialisased text-slate-900 dark:text-slate-100">
         <Providers>
-          <LoadingPageIndicatior />
+          {/*     <LoadingPageIndicatior /> */}
+          <NextTopLoader
+            color={`#7dd3fc`}
+            height={2}
+            showSpinner={false}
+            speed={200}
+          />
           <Toaster position="bottom-right" />
 
           {/* @ts-expect-error Server component*/}

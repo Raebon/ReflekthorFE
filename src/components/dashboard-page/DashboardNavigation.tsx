@@ -18,17 +18,17 @@ import { Facebook } from "lucide-react";
 const components: { title: string; href: string; description: string }[] = [
   {
     title: "Posts overview",
-    href: "/dashboard",
+    href: "/dashboard/posts",
     description: "All posts in grid",
   },
   {
     title: "Create post",
-    href: "/dashboard",
+    href: "/dashboard/posts/create",
     description: "Creating blog post",
   },
   {
     title: "Edit post",
-    href: "/dashboard",
+    href: "/dashboard/create",
     description: "Choose a post and edit",
   },
 ];
@@ -38,16 +38,14 @@ export function NavigationMenuDemo() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Statistics</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Dashboard</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <span className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-black/50 to-gray-400 p-6 no-underline outline-none focus:shadow-md">
                     <Facebook className="h-6 w-6" />
-                    <div className="mb-2 mt-4 text-lg font-medium">
-                      Statistics
-                    </div>
+                    <div className="mb-2 mt-4 text-lg font-medium">Socials</div>
                     <p className="text-sm leading-tight text-muted-foreground">
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       Tempora enim ducimus reprehenderit non eos nam nesciunt
@@ -56,10 +54,13 @@ export function NavigationMenuDemo() {
                   </span>
                 </NavigationMenuLink>
               </li>
-              <ListItem href="/dashboard" title="My statistics">
+              <ListItem href="/dashboard#my-statistics" title="My statistics">
                 Your statistics based on your created posts.
               </ListItem>
-              <ListItem href="/dashboard" title="Blog statistics">
+              <ListItem
+                href="/dashboard#blog-statistics"
+                title="Blog statistics"
+              >
                 All metrics. Statistics based on blogs, views, etc...
               </ListItem>
             </ul>

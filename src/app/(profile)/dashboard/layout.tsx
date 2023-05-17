@@ -8,7 +8,7 @@ export default function RootLayout({
   return (
     <main className="max-w-[85rem] mx-auto min-h-[80vh] px-6 shadow-md rounded-[0.185rem]">
       <NavigationMenuDemo />
-      {children}
+      <div className="mt-2 py-5">{children}</div>
     </main>
   );
 }
