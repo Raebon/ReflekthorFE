@@ -54,9 +54,24 @@ const columnsDraft: GridColDef[] = [
     headerName: "",
     type: "actions",
     getActions: (params: GridRowParams) => [
-      <GridActionsCellItem icon={<Eye />} label="Visit blog" showInMenu />,
-      <GridActionsCellItem icon={<Pencil />} label="Edit" showInMenu />,
-      <GridActionsCellItem icon={<Delete />} label="Delete" showInMenu />,
+      <GridActionsCellItem
+        key={"gridAction1"}
+        icon={<Eye />}
+        label="Visit blog"
+        showInMenu
+      />,
+      <GridActionsCellItem
+        key={"gridAction2"}
+        icon={<Pencil />}
+        label="Edit"
+        showInMenu
+      />,
+      <GridActionsCellItem
+        key={"gridAction3"}
+        icon={<Delete />}
+        label="Delete"
+        showInMenu
+      />,
     ],
     /*     width: 500, */
     /*  renderCell(params) {
