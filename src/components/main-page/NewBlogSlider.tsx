@@ -13,7 +13,6 @@ import { useGetBlogsSetupQuery } from "@/utils/api/query/getBlogQueryKey";
 import { formatDistance, subDays } from "date-fns";
 import { Skeleton } from "@/ui/Skeleton";
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
-
 interface NewBlogSliderProps {
   body: PostsRequest;
 }
@@ -70,7 +69,7 @@ function Slide({ data }: { data: PostDto }) {
         >
           <div
             className={`w-1 mr-2 ${
-              category?.color ? `bg-${category?.color}` : "bg-sky-500"
+              category ? `bg-${category.color}` : "bg-sky-500"
             }`}
           ></div>
           <div className="w-full">
@@ -78,7 +77,7 @@ function Slide({ data }: { data: PostDto }) {
               <div id="new-blog-category">
                 <span
                   className={`text-sm md:text-md ${
-                    category?.color ? `text-${category?.color}` : "text-sky-500"
+                    category ? `text-${category.color}` : "text-sky-500"
                   }`}
                 >
                   {category?.name}

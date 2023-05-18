@@ -34,8 +34,18 @@ const CreatePostForm: FC<CreatePostFormProps> = ({ token }) => {
       content: undefined,
       categoryId: 1,
       isPublished: false,
-      image: undefined,
-      imageCaption: undefined,
+      image: {
+        imageData: undefined,
+        imageCaption: undefined,
+      },
+      smallImage: {
+        imageData: undefined,
+        imageCaption: undefined,
+      },
+      mediumImage: {
+        imageData: undefined,
+        imageCaption: undefined,
+      },
     },
   });
   const selectedCategoryWatch = watch("categoryId");
@@ -77,11 +87,17 @@ const CreatePostForm: FC<CreatePostFormProps> = ({ token }) => {
 
   const onSelectCategory = (e: string) => setValue("categoryId", Number(e));
 
-  const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
+  const onChange = async (
+    e: ChangeEvent<HTMLInputElement>,
+    formProp:
+      | "image.imageData"
+      | "mediumImage.imageData"
+      | "smallImage.imageData" = "image.imageData"
+  ) => {
     if (e.target.files) {
       const file = e.target.files[0];
       const base64 = await convertBase64(file);
-      setValue("image", base64 as any);
+      setValue(formProp, base64 as any);
     }
   };
   const handleOnCheckedChange = (e: CheckedState) =>
@@ -104,7 +120,7 @@ const CreatePostForm: FC<CreatePostFormProps> = ({ token }) => {
         <div className="flex gap-4 w-full">
           <div className="form-group required w-full">
             <Label className="control-label" size="sm">
-              Upload image
+              Upload large image (recomended 976x350px)
             </Label>
             <Input
               className="mt-1"
@@ -116,11 +132,59 @@ const CreatePostForm: FC<CreatePostFormProps> = ({ token }) => {
           </div>
           <div className="form-group required w-full">
             <Label className="control-label mt-1" size="sm">
-              Alt image text
+              Alt image text (image description)
             </Label>
             <Input
               className="mt-1"
-              {...register("imageCaption", { required: true })}
+              {...register("image.imageCaption", { required: true })}
+              required
+            />
+          </div>
+        </div>
+        <div className="flex gap-4 w-full">
+          <div className="form-group required w-full">
+            <Label className="control-label" size="sm">
+              Upload medium image (recomended 312x188px)
+            </Label>
+            <Input
+              className="mt-1"
+              type="file"
+              onChange={(e) => onChange(e, "mediumImage.imageData")}
+              accept="image/png, image/jpeg, image/webp"
+              required
+            />
+          </div>
+          <div className="form-group required w-full">
+            <Label className="control-label mt-1" size="sm">
+              Alt image text (image description)
+            </Label>
+            <Input
+              className="mt-1"
+              {...register("mediumImage.imageCaption", { required: true })}
+              required
+            />
+          </div>
+        </div>
+        <div className="flex gap-4 w-full">
+          <div className="form-group required w-full">
+            <Label className="control-label" size="sm">
+              Upload small image (recomended 115x153px)
+            </Label>
+            <Input
+              className="mt-1"
+              type="file"
+              onChange={(e) => onChange(e, "smallImage.imageData")}
+              accept="image/png, image/jpeg, image/webp"
+              required
+            />
+          </div>
+          <div className="form-group required w-full">
+            <Label className="control-label mt-1" size="sm">
+              Alt image text (image description)
+            </Label>
+            <Input
+              className="mt-1"
+              {...register("smallImage.imageCaption", { required: true })}
               required
             />
           </div>

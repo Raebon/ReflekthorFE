@@ -39,14 +39,21 @@ export default NewBlogsGrid;
 
 function BlogItem({ data }: { data: PostDto }) {
   const img = "/car-wash-detailing-station.jpg";
-  const { slug, title, category, publishDate, content, authorName, imagePath } =
-    data;
+  const {
+    slug,
+    title,
+    category,
+    publishDate,
+    content,
+    authorName,
+    imageMediumPath,
+  } = data;
   return (
     <Link href={`/posts/${slug}`} className="flex flex-col">
       <Image
         className="w-full h-[188px]"
         src={
-          `https://reflecthorstorage.blob.core.windows.net/images/${imagePath}` ||
+          `https://reflecthorstorage.blob.core.windows.net/images/${imageMediumPath}` ||
           "/"
         }
         width={312}
