@@ -1,15 +1,16 @@
 "use client";
 import { ThemeProvider } from "next-themes";
 import { SessionProvider } from "next-auth/react";
-import { FC, ReactNode, useState } from "react";
+import React, { FC, ReactNode, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 //import { ReactQueryDevtools } from "@tanstack/react-query/devtools";
 
 interface ProvidersProps {
   children: ReactNode;
+  token: string;
 }
-
-const Providers: FC<ProvidersProps> = ({ children }) => {
+export const TokenContext = React.createContext("");
+const Providers: FC<ProvidersProps> = ({ children, token }) => {
   const [queryClient] = useState(
     () => new QueryClient({ defaultOptions: { queries: { staleTime: 5000 } } })
   );
@@ -17,9 +18,11 @@ const Providers: FC<ProvidersProps> = ({ children }) => {
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       {/*todo session provider */}
       <SessionProvider>
-        <QueryClientProvider client={queryClient}>
-          {children}
-        </QueryClientProvider>
+        <TokenContext.Provider value={token ?? ""}>
+          <QueryClientProvider client={queryClient}>
+            {children}
+          </QueryClientProvider>
+        </TokenContext.Provider>
       </SessionProvider>
       {/*   <ReactQueryDevtools initialIsOpen={false} /> */}
     </ThemeProvider>

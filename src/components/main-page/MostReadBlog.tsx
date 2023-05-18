@@ -67,9 +67,8 @@ function BlogItem({ data }: { data: PostDto }) {
       />
       <div className="leading-5 tracking-tight flex flex-col gap-2 py-1">
         <div
-          className={`h-0.5 w-7 ${
-            category?.color ? `bg-${category?.color}` : "bg-sky-500"
-          }`}
+          className={`h-0.5 w-7`}
+          style={{ backgroundColor: category?.color ?? "gray" }}
         />
         <span className="text-sm font-semibold">{title}</span>
         <span className="text-sm mt-2">

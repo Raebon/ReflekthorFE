@@ -53,13 +53,13 @@ function Slide({ data }: { data: PostDto }) {
     <>
       <div id="new-blog-image" className="mx-auto flex-none relative">
         <Image
-          className="object-fill max-h-[350px] w-[1236px]"
+          className="object-cover max-h-[350px] w-[976px]"
           src={
             `https://reflecthorstorage.blob.core.windows.net/images/${imagePath}` ||
             "/"
           }
           width={350}
-          height={1236}
+          height={976}
           alt="test"
         />
 
@@ -68,17 +68,15 @@ function Slide({ data }: { data: PostDto }) {
           className="absolute w-full left-0 bottom-0 p-5 bg-slate-900/50 flex"
         >
           <div
-            className={`w-1 mr-2 ${
-              category ? `bg-${category.color}` : "bg-sky-500"
-            }`}
+            className={`w-1 mr-2`}
+            style={{ backgroundColor: category?.color ?? "gray" }}
           ></div>
           <div className="w-full">
             <Link href={`/posts/${slug}`}>
               <div id="new-blog-category">
                 <span
-                  className={`text-sm md:text-md ${
-                    category ? `text-${category.color}` : "text-sky-500"
-                  }`}
+                  className={`text-sm md:text-md`}
+                  style={{ color: category?.color ?? "gray" }}
                 >
                   {category?.name}
                 </span>

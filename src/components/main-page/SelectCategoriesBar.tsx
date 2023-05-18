@@ -15,9 +15,8 @@ const SelectCategoriesBar = () => {
               key={index}
             >
               <div
-                className={`h-2 w-2 rounded-full ${
-                  item.color ? `bg-${item.color}` : "bg-sky-500"
-                }`}
+                className={`h-2 w-2 rounded-full`}
+                style={{ backgroundColor: item.color ?? "gray" }}
               />
               <span className="text-sm tracking-tighter leading-tight text-slate-700 dark:text-slate-400 hover:text-black hover:dark:text-slate-100">
                 {item.name}

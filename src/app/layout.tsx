@@ -5,21 +5,20 @@ import "@/styles/globals.css";
 import { Inter } from "next/font/google";
 import Providers from "@/components/Providers";
 import { cn } from "@/lib/utils";
-import LoadingPageIndicatior from "@/components/LoadingPageIndicatior";
 import NextTopLoader from "nextjs-toploader";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession(authOptions);
   return (
-    <html
-      lang="en"
-      className={cn("bg-white text-slate-900 antialiased", inter.className)}
-    >
+    <html lang="en" className={cn("antialiased", inter.className)}>
       <link
         rel="apple-touch-icon"
         sizes="180x180"
@@ -45,10 +44,8 @@ export default function RootLayout({
       ></link>
       <meta name="msapplication-TileColor" content="#000000"></meta>
       <meta name="theme-color" content="#ffffff"></meta>
-
       <body className="min-h-screen bg-slate-50 dark:bg-slate-900 antialisased text-slate-900 dark:text-slate-100">
-        <Providers>
-          {/*     <LoadingPageIndicatior /> */}
+        <Providers token={session?.accessToken?.accessToken ?? ""}>
           <NextTopLoader
             color={`#7dd3fc`}
             height={2}
@@ -56,8 +53,6 @@ export default function RootLayout({
             speed={200}
           />
           <Toaster position="bottom-right" />
-
-          {/* @ts-expect-error Server component*/}
           <Navbar />
           <main>{children}</main>
           <Footer />

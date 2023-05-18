@@ -1,6 +1,6 @@
 import { NavigationMenuDemo } from "@/components/dashboard-page/DashboardNavigation";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;

@@ -15,17 +15,19 @@ import { useGetCategoriesSetupQuery } from "@/utils/api/query/getCategoriesQuery
 import CustomSelect from "@/components/forms/CustomSelect";
 import { SelectItemType } from "@/types/appTypes";
 import { convertCategoryItems } from "@/utils/parsingItemsForSelect";
+import React from "react";
+import { TokenContext } from "@/components/Providers";
 
-interface CreatePostFormProps {
-  token: string;
-}
+interface CreatePostFormProps {}
 
-const CreatePostForm: FC<CreatePostFormProps> = ({ token }) => {
+const CreatePostForm: FC<CreatePostFormProps> = ({}) => {
+  const token = React.useContext(TokenContext);
   const {
     register,
     handleSubmit,
     watch,
     setValue,
+    reset,
     formState: { errors },
     control,
   } = useForm<CreatePostRequest>({
@@ -74,6 +76,7 @@ const CreatePostForm: FC<CreatePostFormProps> = ({ token }) => {
           message: "Post is created successfully!",
           type: "success",
         });
+        reset();
       },
       onError: () => {
         toast({

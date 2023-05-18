@@ -1,34 +1,36 @@
 "use client";
-import { FC } from "react";
-import {
-  GridColumnHeaderParams,
-  type GridColDef,
-  DataGrid,
-  GridCellParams,
-  GridRowParams,
-  GridActionsCellItem,
-} from "@mui/x-data-grid";
-import { useTheme } from "next-themes";
+import { CategoryDto } from "@/types/reflektor-api-service";
 import { ThemeProvider, createTheme } from "@mui/material";
-import { CategoryDto, PostDto } from "@/types/reflektor-api-service";
-import { formatDatetime } from "@/utils/formatDatetime";
-import { Button } from "@/ui/Button";
+import {
+  DataGrid,
+  GridActionsCellItem,
+  GridColumnHeaderParams,
+  GridRowParams,
+  type GridColDef,
+} from "@mui/x-data-grid";
 import { Delete, Eye, Pencil } from "lucide-react";
+import { useTheme } from "next-themes";
+import { FC } from "react";
 
 const columnsDraft: GridColDef[] = [
   {
     field: "col0",
     headerName: "Color",
-    width: 5,
+    width: 140,
     sortable: false,
     renderCell(params) {
-      return <div className={`w-2 h-2 rounded-full bg-${params.value}`}></div>;
+      return (
+        <div
+          className={`w-[100px] h-5 rounded-md`}
+          style={{ backgroundColor: params.value }}
+        ></div>
+      );
     },
   },
   {
     field: "col1",
     headerName: "Category Name",
-    width: 200,
+    width: 250,
     renderHeader(params) {
       return (
         <strong className="font-semibold">{params.colDef.headerName} 🔑</strong>
@@ -38,6 +40,7 @@ const columnsDraft: GridColDef[] = [
   {
     field: "col2",
     headerName: "",
+    width: 920,
     type: "actions",
     getActions: (params: GridRowParams) => [
       <GridActionsCellItem
@@ -51,14 +54,12 @@ const columnsDraft: GridColDef[] = [
         icon={<Pencil />}
         onClick={() => console.log(params.id)}
         label="Edit"
-        showInMenu
       />,
       <GridActionsCellItem
         key={"gridAction3"}
         icon={<Delete />}
         onClick={() => console.log(params.id)}
         label="Delete"
-        showInMenu
       />,
     ],
   },

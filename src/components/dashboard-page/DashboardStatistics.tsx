@@ -3,11 +3,9 @@ import { FC, useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { Button } from "@/ui/Button";
 import { toast } from "@/ui/Toast";
-interface DashboardNavBarProps {
-  token: string;
-}
+interface DashboardNavBarProps {}
 
-const DashboardStatistics: FC<DashboardNavBarProps> = ({ token }) => {
+const DashboardStatistics: FC<DashboardNavBarProps> = ({}) => {
   const toastSuccess = () => {
     toast({
       title: "Success",
