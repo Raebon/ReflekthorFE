@@ -120,7 +120,7 @@ const CategoryCreateDialog: FC<CategoryCreateDialogProps> = ({ token }) => {
                   </Button>
                   and choose a color from the palette. Copy and paste its color
                   code, such as [#475569] without the brackets. Then paste it
-                  into the "Color" input and check the corresponding color
+                  into the „Color“ input and check the corresponding color
                   displayed underneath.
                 </span>
               }
