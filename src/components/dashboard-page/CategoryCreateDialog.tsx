@@ -110,14 +110,14 @@ const CategoryCreateDialog: FC<CategoryCreateDialogProps> = ({ token }) => {
               title="How to choose color?"
               description={
                 <span>
-                  Please visit{" "}
+                  Please visit
                   <Button
                     className="p-0 h-[14px]"
                     variant="link"
                     onClick={redirectToTailwindDocs}
                   >
                     this site
-                  </Button>{" "}
+                  </Button>
                   and choose a color from the palette. Copy and paste its color
                   code, such as [#475569] without the brackets. Then paste it
                   into the "Color" input and check the corresponding color
