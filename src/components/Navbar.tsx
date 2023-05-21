@@ -1,14 +1,11 @@
 "use client";
-import Link from "next/link";
-import ThemeToggle from "@/components/ThemeToggle";
 import ProfileDropdown from "@/components/ProfileDropdown";
-import { getServerSession } from "next-auth";
-import { buttonVariants } from "./ui/Button";
-import SignInButton from "./SignInButton";
-import { authOptions } from "@/lib/auth";
 import { TokenContext } from "@/components/Providers";
+import ThemeToggle from "@/components/ThemeToggle";
+import Link from "next/link";
 import React from "react";
-
+import SignInButton from "./SignInButton";
+import { config } from "@/config";
 const Navbar = () => {
   const token = React.useContext(TokenContext);
   return (
@@ -18,7 +15,7 @@ const Navbar = () => {
           href="/"
           className={"text-4xl font-bold tracking-tighter leading-tight"}
         >
-          Reflektor.
+          {config.headerBlogName}
         </Link>
         <div className="md:hidden">
           <ThemeToggle />
