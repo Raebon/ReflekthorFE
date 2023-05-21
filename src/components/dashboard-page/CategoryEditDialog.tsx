@@ -1,48 +1,59 @@
 "use client";
 
-import { signIn } from "next-auth/react";
-import { FC, useState } from "react";
+import AlertBox from "@/components/AlertBox";
+import {
+  CategoryDto,
+  CreateCategoryRequest,
+  UpdateCategoryRequest,
+} from "@/types/reflektor-api-service";
+import { Button } from "@/ui/Button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogFooter,
 } from "@/ui/Dialog";
-import { Button } from "@/ui/Button";
 import { Input } from "@/ui/Input";
 import { Label } from "@/ui/Label";
-import { useForm, FieldValues } from "react-hook-form";
-import { CreateCategoryRequest } from "@/types/reflektor-api-service";
-import { PlusCircle } from "lucide-react";
-import AlertBox from "@/components/AlertBox";
 import {
   CreateCategoryBody,
-  useCreateCategoryMutation,
+  useEditCategoryMutation,
 } from "@/utils/api/mutation/useCategoryMutation";
+import { Pencil } from "lucide-react";
+import { FC, useCallback, useState } from "react";
+import { useForm } from "react-hook-form";
 import { toast } from "../ui/Toast";
 
-interface CategoryCreateDialogProps {
+interface CategoryEditDialogProps {
   token: string;
+  category: CategoryDto;
 }
 
-const CategoryCreateDialog: FC<CategoryCreateDialogProps> = ({ token }) => {
+const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
+  token,
+  category,
+}) => {
+  const [showModal, setShowModal] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
     watch,
     reset,
+    setValue,
     formState: { errors },
-  } = useForm<CreateCategoryRequest>({
+  } = useForm<UpdateCategoryRequest>({
     defaultValues: {
-      color: "black",
-      name: undefined,
+      categoryId: category.categoryId,
+      color: category.color,
+      name: category.name,
     },
   });
   const colorWatch = watch("color");
-  const createCategory = useCreateCategoryMutation();
+  console.log(colorWatch);
+  const editCategory = useEditCategoryMutation();
 
   const onSubmit = (e: CreateCategoryRequest) => {
     let payload: CreateCategoryBody = {
@@ -50,15 +61,12 @@ const CategoryCreateDialog: FC<CategoryCreateDialogProps> = ({ token }) => {
       token: token,
     };
 
-    createCategory.mutateAsync(payload, {
+    editCategory.mutateAsync(payload, {
       onSuccess: () => {
-        reset({
-          color: "black",
-          name: undefined,
-        });
+        toggleModal();
         toast({
           title: "Success",
-          message: "Category is created successfully!",
+          message: "Category is updated successfully!",
           type: "success",
         });
       },
@@ -75,19 +83,27 @@ const CategoryCreateDialog: FC<CategoryCreateDialogProps> = ({ token }) => {
   const redirectToTailwindDocs = () =>
     window.open("https://tailwindcss.com/docs/customizing-colors", "_blank");
 
-  const resetForm = () => {
-    reset();
-  };
+  const toggleModal = useCallback(() => {
+    setShowModal((prev) => !prev);
+  }, []);
+
+  const resetForm = () =>
+    reset({
+      categoryId: category.categoryId,
+      color: category.color,
+      name: category.name,
+    });
+
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button onClick={resetForm}>
-          <PlusCircle className="w-4 mr-2" /> Create new category
+    <Dialog onOpenChange={toggleModal} open={showModal}>
+      <DialogTrigger asChild onClick={resetForm}>
+        <Button>
+          <Pencil className="w-4" />
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create new category</DialogTitle>
+          <DialogTitle>Edit {category.name} category</DialogTitle>
           <DialogDescription>
             Fill form to create new blog category
           </DialogDescription>
@@ -131,11 +147,11 @@ const CategoryCreateDialog: FC<CategoryCreateDialogProps> = ({ token }) => {
         </div>
         <DialogFooter>
           <Button
-            type="button"
-            isLoading={createCategory.isLoading}
+            type="submit"
+            isLoading={editCategory.isLoading}
             onClick={handleSubmit(onSubmit)}
           >
-            Create
+            edit
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -143,4 +159,4 @@ const CategoryCreateDialog: FC<CategoryCreateDialogProps> = ({ token }) => {
   );
 };
 
-export default CategoryCreateDialog;
+export default CategoryEditDialog;

@@ -30,3 +30,32 @@ export const useCreatePostMutation = () => {
     }
   );
 };
+
+//Delete post
+async function deletePost(id: number, token: string): Promise<AxiosResponse> {
+  try {
+    const response: AxiosResponse = await axios.delete(`/blogs/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response;
+  } catch (error) {
+    // Handle the error
+    throw error;
+  }
+}
+
+export interface DeletePostBody {
+  id: number;
+  token: string;
+}
+
+export const useDeletePostMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    (body: DeletePostBody) => deletePost(body.id, body.token),
+    {
+      onSuccess: () => queryClient.invalidateQueries(getBlogsQueryKey()),
+    }
+  );
+};

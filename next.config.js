@@ -28,6 +28,10 @@ const nextConfig = {
         destination: `${process.env.API_URL}blogs/categories`,
       },
       {
+        source: "/blogs/categories/:id",
+        destination: `${process.env.API_URL}blogs/categories/:id`,
+      },
+      {
         source: "/blogs",
         destination: `${process.env.API_URL}blogs`,
       },

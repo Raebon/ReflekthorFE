@@ -31,8 +31,8 @@ const BlogHeaderComponent: FC<BlogHeaderComponentProps> = ({
           `https://reflecthorstorage.blob.core.windows.net/images/${imagePath}` ||
           "/"
         }
-        width={350}
-        height={1236}
+        width={1440}
+        height={1080}
         alt={title}
       />
     </div>

@@ -1,5 +1,9 @@
+"use client";
+import CategoryGridBannerComponent from "@/components/dashboard-page/CategoryGridBannerComponent";
+import { useGetCategoriesSetupQuery } from "@/utils/api/query/getCategoriesQueryKey";
 import type { Metadata } from "next";
-import CategoryManage from "@/components/dashboard-page/CategoryManage";
+import { columns } from "./columns";
+import { DataTable } from "./data-table";
 
 export const metadata: Metadata = {
   title: "Reflektor | Categories",
@@ -7,9 +11,11 @@ export const metadata: Metadata = {
 };
 
 export default function Category() {
+  const { data } = useGetCategoriesSetupQuery();
   return (
     <section>
-      <CategoryManage />
+      <CategoryGridBannerComponent />
+      <DataTable columns={columns} data={data ?? []} />
     </section>
   );
 }

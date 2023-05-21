@@ -13,6 +13,7 @@ import { useGetBlogsSetupQuery } from "@/utils/api/query/getBlogQueryKey";
 import { formatDistance, subDays } from "date-fns";
 import { Skeleton } from "@/ui/Skeleton";
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
+import { AspectRatio } from "@/components/ui/AspectRatio";
 interface NewBlogSliderProps {
   body: PostsRequest;
 }
@@ -52,16 +53,20 @@ function Slide({ data }: { data: PostDto }) {
   return (
     <>
       <div id="new-blog-image" className="mx-auto flex-none relative">
+        {/*   <div className="max-h-[350px] w-[976px]">
+          <AspectRatio ratio={16 / 9}> */}
         <Image
           className="object-cover max-h-[350px] w-[976px]"
           src={
             `https://reflecthorstorage.blob.core.windows.net/images/${imagePath}` ||
             "/"
           }
-          width={350}
-          height={976}
+          width={1440}
+          height={1080}
           alt="test"
         />
+        {/*      </AspectRatio>
+        </div> */}
 
         <div
           id="info"

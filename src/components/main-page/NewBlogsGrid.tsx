@@ -7,6 +7,7 @@ import { useGetBlogsSetupQuery } from "@/utils/api/query/getBlogQueryKey";
 import { Skeleton } from "@/ui/Skeleton";
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
 import Link from "next/link";
+import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 interface BlogGridProps {
   body: PostsRequest;
 }
@@ -56,8 +57,8 @@ function BlogItem({ data }: { data: PostDto }) {
           `https://reflecthorstorage.blob.core.windows.net/images/${imageMediumPath}` ||
           "/"
         }
-        width={312}
-        height={188}
+        width={600}
+        height={400}
         alt={title!}
       />
       <div className="leading-5 tracking-tight flex flex-col mt-2">

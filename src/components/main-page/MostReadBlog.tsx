@@ -7,6 +7,7 @@ import { formatDistance, subDays } from "date-fns";
 import { Skeleton } from "@/ui/Skeleton";
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
 import Link from "next/link";
+import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 interface MostReadBlogProps {
   body: PostsRequest;
@@ -59,12 +60,13 @@ function BlogItem({ data }: { data: PostDto }) {
   return (
     <Link className="flex gap-3" href={`/posts/${slug}`}>
       <Image
-        className="object-cover w-[115px] h-[153px]"
+        className="object-cover "
         src={`https://reflecthorstorage.blob.core.windows.net/images/${imageSmallPath}`}
         width={115}
         height={153}
         alt="test"
       />
+
       <div className="leading-5 tracking-tight flex flex-col gap-2 py-1">
         <div
           className={`h-0.5 w-7`}

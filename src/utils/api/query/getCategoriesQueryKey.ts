@@ -5,7 +5,7 @@ import axios, { AxiosResponse } from "axios";
 /* Get categories for blog */
 export const getCategoriesQueryKeyPrefix = "categories";
 
-async function getCategories() {
+export async function getCategories(): Promise<CategoryDto[]> {
   try {
     const response: AxiosResponse<CategoryDto[]> = await axios.get(
       `/blogs/categories`

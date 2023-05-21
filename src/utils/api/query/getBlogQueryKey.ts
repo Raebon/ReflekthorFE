@@ -20,7 +20,7 @@ async function getNewBlogs(body: PostsRequest) {
 
 export const getBlogsQueryKey = (body?: PostsRequest) => [
   getBlogQueryKeyPrefix,
-  body,
+  // body,
 ];
 
 export const getBlogsSetupQuery = (body: PostsRequest) => {
