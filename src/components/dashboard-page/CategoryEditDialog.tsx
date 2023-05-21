@@ -26,16 +26,16 @@ import { Pencil } from "lucide-react";
 import { FC, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "../ui/Toast";
+import React from "react";
+import { TokenContext } from "../Providers";
+import { Row } from "@tanstack/react-table";
 
 interface CategoryEditDialogProps {
-  token: string;
-  category: CategoryDto;
+  row: Row<CategoryDto>;
 }
 
-const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
-  token,
-  category,
-}) => {
+const CategoryEditDialog: FC<CategoryEditDialogProps> = ({ row }) => {
+  const token = React.useContext(TokenContext);
   const [showModal, setShowModal] = useState<boolean>(false);
   const {
     register,
@@ -46,13 +46,13 @@ const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
     formState: { errors },
   } = useForm<UpdateCategoryRequest>({
     defaultValues: {
-      categoryId: category.categoryId,
-      color: category.color,
-      name: category.name,
+      categoryId: row.getValue("categoryId"),
+      color: row.getValue("color"),
+      name: row.getValue("name"),
     },
   });
   const colorWatch = watch("color");
-  console.log(colorWatch);
+
   const editCategory = useEditCategoryMutation();
 
   const onSubmit = (e: CreateCategoryRequest) => {
@@ -89,9 +89,9 @@ const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
 
   const resetForm = () =>
     reset({
-      categoryId: category.categoryId,
-      color: category.color,
-      name: category.name,
+      categoryId: row.getValue("categoryId"),
+      color: row.getValue("color"),
+      name: row.getValue("name"),
     });
 
   return (
@@ -103,7 +103,7 @@ const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Edit {category.name} category</DialogTitle>
+          <DialogTitle>Edit {row.getValue("name")} category</DialogTitle>
           <DialogDescription>
             Fill form to create new blog category
           </DialogDescription>
