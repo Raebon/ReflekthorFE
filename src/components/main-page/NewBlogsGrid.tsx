@@ -17,7 +17,7 @@ const NewBlogsGrid: FC<BlogGridProps> = ({ body }) => {
   const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
-    <section className="grid grid-cols-2 gap-5">
+    <section className="grid md:grid-cols-2 gap-5">
       {isLoading &&
         skeletonArray.map((item, index) => (
           <div key={index} className={`flex flex-col`}>
@@ -39,7 +39,6 @@ const NewBlogsGrid: FC<BlogGridProps> = ({ body }) => {
 export default NewBlogsGrid;
 
 function BlogItem({ data }: { data: PostDto }) {
-  const img = "/car-wash-detailing-station.jpg";
   const {
     slug,
     title,

@@ -8,15 +8,44 @@
 // ReSharper disable InconsistentNaming
 // @ts-nocheck
 
+export interface Category {
+  categoryId?: number;
+  name?: string | undefined;
+  color?: string | undefined;
+  posts?: Post[] | undefined;
+}
+
 export interface CategoryDto {
   categoryId?: number;
   name?: string | undefined;
   color?: string | undefined;
 }
 
+export interface Comment {
+  commentId?: number;
+  content?: string | undefined;
+  publishDate?: Date;
+  userId?: string;
+  author?: User;
+  postId?: number;
+  post?: Post;
+}
+
+export interface CommentsRequest {
+  skip?: number;
+  take?: number;
+  sorting?: string | undefined;
+  postId?: number;
+}
+
 export interface CreateCategoryRequest {
   name?: string | undefined;
   color?: string | undefined;
+}
+
+export interface CreateCommentRequest {
+  postId?: number;
+  content?: string | undefined;
 }
 
 export interface CreatePostRequest {
@@ -27,6 +56,7 @@ export interface CreatePostRequest {
   image?: ImageDto;
   mediumImage?: ImageDto;
   smallImage?: ImageDto;
+  seoSetting?: PostSeoDto;
 }
 
 export interface CreateUserRequest {
@@ -48,6 +78,28 @@ export interface LogInRequest {
   password?: string | undefined;
 }
 
+export interface Post {
+  postId?: number;
+  title?: string | undefined;
+  content?: string | undefined;
+  publishDate?: Date | undefined;
+  creationDate?: Date;
+  isPublished?: boolean;
+  slug?: string | undefined;
+  imageCaption?: string | undefined;
+  imagePath?: string | undefined;
+  imageSmallPath?: string | undefined;
+  imageMediumPath?: string | undefined;
+  userId?: string;
+  author?: User;
+  categoryId?: number;
+  category?: Category;
+  statistic?: PostStatistic;
+  seoSetting?: PostSeo;
+  comments?: Comment[] | undefined;
+  postTags?: PostTag[] | undefined;
+}
+
 export interface PostDto {
   readonly postId?: number;
   title?: string | undefined;
@@ -63,6 +115,31 @@ export interface PostDto {
   readonly slug?: string | undefined;
   statistic?: PostStatisticDto;
   category?: CategoryDto;
+  seoSetting?: PostSeoDto;
+}
+
+export interface PostSeo {
+  postId?: number;
+  metaTitle?: string | undefined;
+  metaDescription?: string | undefined;
+  metaKeywords?: string | undefined;
+  metaAuthor?: string | undefined;
+}
+
+export interface PostSeoDto {
+  postId?: number;
+  metaTitle?: string | undefined;
+  metaDescription?: string | undefined;
+  metaKeywords?: string | undefined;
+  metaAuthor?: string | undefined;
+}
+
+export interface PostStatistic {
+  postId?: number;
+  visitCount?: number;
+  shareCount?: number;
+  messageCount?: number;
+  post?: Post;
 }
 
 export interface PostStatisticDto {
@@ -72,6 +149,13 @@ export interface PostStatisticDto {
   messageCount?: number;
 }
 
+export interface PostTag {
+  postId?: number;
+  post?: Post;
+  tagId?: number;
+  tag?: Tag;
+}
+
 export interface PostsRequest {
   skip?: number;
   take?: number;
@@ -79,6 +163,12 @@ export interface PostsRequest {
   showOnlyPublished?: boolean;
   showLatestPosts?: boolean;
   showMostReadPosts?: boolean;
+}
+
+export interface Tag {
+  tagId?: number;
+  name?: string | undefined;
+  postTags?: PostTag[] | undefined;
 }
 
 export interface UpdateCategoryRequest {
@@ -96,11 +186,34 @@ export interface UpdatePostRequest {
   image?: ImageDto;
   mediumImage?: ImageDto;
   smallImage?: ImageDto;
+  seoSetting?: PostSeoDto;
 }
 
 export interface UpdateUserRequest {
   firstName?: string | undefined;
   lastName?: string | undefined;
+}
+
+export interface User {
+  id?: string;
+  userName?: string | undefined;
+  normalizedUserName?: string | undefined;
+  email?: string | undefined;
+  normalizedEmail?: string | undefined;
+  emailConfirmed?: boolean;
+  passwordHash?: string | undefined;
+  securityStamp?: string | undefined;
+  concurrencyStamp?: string | undefined;
+  phoneNumber?: string | undefined;
+  phoneNumberConfirmed?: boolean;
+  twoFactorEnabled?: boolean;
+  lockoutEnd?: Date | undefined;
+  lockoutEnabled?: boolean;
+  accessFailedCount?: number;
+  firstName?: string | undefined;
+  lastName?: string | undefined;
+  posts?: Post[] | undefined;
+  comments?: Comment[] | undefined;
 }
 
 export interface UserDto {

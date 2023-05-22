@@ -39,6 +39,10 @@ const nextConfig = {
         source: "/blogs/:slug",
         destination: `${process.env.API_URL}blogs/:slug`,
       },
+      {
+        source: "/blogs/:slug/seo",
+        destination: `${process.env.API_URL}blogs/:slug/seo`,
+      },
     ];
   },
 };

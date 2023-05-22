@@ -1,11 +1,37 @@
 import Blog from "@/components/blog-page/Blog";
-import type { Metadata } from "next";
+import { config } from "@/config";
+import { getBlogSeoBySlug } from "@/utils/api/query/getBlogQueryKey";
+import type { Metadata, ResolvingMetadata } from "next";
 
-export const metadata: Metadata = {
-  title: `Reflektor | Post`,
-  description: "Learning Next.js SEO",
+type Props = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export default function Page({ params }: any) {
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent?: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const id = params.slug;
+
+  // fetch data
+  const seo = await getBlogSeoBySlug(id);
+
+  // optionally access and extend (rather than replace) parent metadata
+  //const previousImages = (await parent)?.openGraph?.images || [];
+  return {
+    ...config.seo,
+    title: seo.metaTitle,
+    description: seo.metaDescription,
+    openGraph: {
+      title: seo.metaTitle,
+      description: seo.metaDescription,
+      //images: ["/some-specific-page-image.jpg", ...previousImages],
+    },
+  };
+}
+
+export default function Page({ params }: Props) {
   return <Blog slug={params.slug} />;
 }

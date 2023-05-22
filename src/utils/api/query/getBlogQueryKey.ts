@@ -1,11 +1,11 @@
-import { PostsRequest, PostDto } from "@/types/reflektor-api-service";
+import { PostsRequest, PostDto, PostSeo } from "@/types/reflektor-api-service";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import axios, { AxiosResponse } from "axios";
 
 /* Get blogs */
 export const getBlogQueryKeyPrefix = "blog-posts";
 
-async function getNewBlogs(body: PostsRequest) {
+export async function getNewBlogs(body: PostsRequest) {
   try {
     const response: AxiosResponse<PostDto[]> = await axios.post(
       `/blogs/posts`,
@@ -35,7 +35,7 @@ export const useGetBlogsSetupQuery = (
 
 /* Get blog object from slug */
 export const getBlogBySlugQueryKeyPrefix = "blog-post";
-async function getBlogBySlug(body: string) {
+export async function getBlogBySlug(body: string) {
   try {
     const response: AxiosResponse<PostDto> = await axios.get(`/blogs/${body}`);
     return response.data;
@@ -67,3 +67,17 @@ export const useGetBlogBySlugSetupQuery = (
     }
   );
 };
+
+//get seo by slug
+export async function getBlogSeoBySlug(body: string) {
+  try {
+    const response: AxiosResponse<PostSeo> = await axios.get(
+      `${process.env.API_URL}blogs/${body}/seo`
+    );
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    // Handle the error
+    throw error;
+  }
+}

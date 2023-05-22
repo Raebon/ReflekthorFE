@@ -65,8 +65,31 @@ const CreatePostForm: FC<CreatePostFormProps> = ({}) => {
   };
 
   const onSubmit = (e: CreatePostRequest) => {
+    let body: CreatePostRequest = {
+      title: e.title,
+      content: e.content,
+      categoryId: e.categoryId,
+      isPublished: e.isPublished,
+      image: {
+        imageData: e.image?.imageData,
+        imageCaption: e.image?.imageCaption,
+      },
+      smallImage: {
+        imageData: e.smallImage?.imageData,
+        imageCaption: e.image?.imageCaption,
+      },
+      mediumImage: {
+        imageData: e.mediumImage?.imageData,
+        imageCaption: e.image?.imageCaption,
+      },
+      seoSetting: {
+        metaTitle: e.title,
+        metaDescription: e.seoSetting?.metaDescription,
+        metaKeywords: e.seoSetting?.metaKeywords,
+      },
+    };
     let payload = {
-      body: e,
+      body: body,
       token: token,
     };
     createPost.mutateAsync(payload, {
@@ -120,6 +143,32 @@ const CreatePostForm: FC<CreatePostFormProps> = ({}) => {
             errorMessage={errors.title?.message}
           />
         </div>
+        <div className="form-group required">
+          <Label className="control-label" size="sm">
+            Description
+          </Label>
+          <Input
+            className={`mt-1 `}
+            {...register("seoSetting.metaDescription", {
+              required: "This is required.",
+            })}
+            required
+            errorMessage={errors.seoSetting?.metaDescription?.message}
+          />
+        </div>
+        <div className="form-group required">
+          <Label className="control-label" size="sm">
+            Keywords
+          </Label>
+          <Input
+            className={`mt-1 `}
+            {...register("seoSetting.metaKeywords", {
+              required: "This is required.",
+            })}
+            required
+            errorMessage={errors.seoSetting?.metaKeywords?.message}
+          />
+        </div>
         <div className="flex gap-4 w-full">
           <div className="form-group required w-full">
             <Label className="control-label" size="sm">
@@ -134,18 +183,6 @@ const CreatePostForm: FC<CreatePostFormProps> = ({}) => {
             />
           </div>
           <div className="form-group required w-full">
-            <Label className="control-label mt-1" size="sm">
-              Alt image text (image description)
-            </Label>
-            <Input
-              className="mt-1"
-              {...register("image.imageCaption", { required: true })}
-              required
-            />
-          </div>
-        </div>
-        <div className="flex gap-4 w-full">
-          <div className="form-group required w-full">
             <Label className="control-label" size="sm">
               Upload medium image (recomended 312x188px)
             </Label>
@@ -158,18 +195,6 @@ const CreatePostForm: FC<CreatePostFormProps> = ({}) => {
             />
           </div>
           <div className="form-group required w-full">
-            <Label className="control-label mt-1" size="sm">
-              Alt image text (image description)
-            </Label>
-            <Input
-              className="mt-1"
-              {...register("mediumImage.imageCaption", { required: true })}
-              required
-            />
-          </div>
-        </div>
-        <div className="flex gap-4 w-full">
-          <div className="form-group required w-full">
             <Label className="control-label" size="sm">
               Upload small image (recomended 115x153px)
             </Label>
@@ -181,16 +206,16 @@ const CreatePostForm: FC<CreatePostFormProps> = ({}) => {
               required
             />
           </div>
-          <div className="form-group required w-full">
-            <Label className="control-label mt-1" size="sm">
-              Alt image text (image description)
-            </Label>
-            <Input
-              className="mt-1"
-              {...register("smallImage.imageCaption", { required: true })}
-              required
-            />
-          </div>
+        </div>
+        <div className="form-group required w-full">
+          <Label className="control-label mt-1" size="sm">
+            Alt image text (image description)
+          </Label>
+          <Input
+            className="mt-1"
+            {...register("image.imageCaption", { required: true })}
+            required
+          />
         </div>
 
         <div>

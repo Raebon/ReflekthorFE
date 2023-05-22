@@ -4,17 +4,14 @@ import SelectCategoriesBar from "@/components/main-page/SelectCategoriesBar";
 import NewBlogSlider from "@/components/main-page/NewBlogSlider";
 import NewBlogsGrid from "@/components/main-page/NewBlogsGrid";
 import MostReadBlog from "@/components/main-page/MostReadBlog";
+import { config } from "@/config";
 
 export const metadata: Metadata = {
-  title: "Reflektor | Domovská stránka",
-  description: "Reflektor",
-  applicationName: "ReflekthorBlogCMS",
-  authors: {
-    name: "REFLEKTHOR",
-    url: "http://www.reflekthor.com",
-  },
-  generator: "Next.js",
-  keywords: "reflekthor, finance, technology, blog, lifestyle",
+  title: config.seo.title,
+  description: config.seo.description,
+  applicationName: config.seo.applicationName,
+  authors: config.seo.authors,
+  keywords: config.seo.keywords,
 };
 
 export default function Home() {
@@ -32,7 +29,7 @@ export default function Home() {
           />
         </Suspense>
         <div className="w-full h-5" />
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
+        <div className="grid md:grid-cols-3 gap-5">
           <div className="col-span-3 md:col-span-2 my-2">
             <h5 className="my-3 text-3xl font-semibold">Latest articles</h5>
             <NewBlogsGrid

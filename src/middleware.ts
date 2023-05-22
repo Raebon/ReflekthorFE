@@ -7,6 +7,7 @@ export default withAuth(
     const pathname = req.nextUrl.pathname; // relative path
     // Manage route protection
     const token = await getToken({ req });
+
     const isAuth = !!token;
     const isAuthPage = req.nextUrl.pathname.startsWith("/login"); // TODO login page then rewrite "/" to path
 

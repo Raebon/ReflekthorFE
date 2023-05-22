@@ -1,19 +1,18 @@
 "use client";
-import { FC } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
 import Image from "next/image";
 import Link from "next/link";
+import { FC } from "react";
+import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 import { PostDto, PostsRequest } from "@/types/reflektor-api-service";
-import { useGetBlogsSetupQuery } from "@/utils/api/query/getBlogQueryKey";
-import { formatDistance, subDays } from "date-fns";
 import { Skeleton } from "@/ui/Skeleton";
+import { useGetBlogsSetupQuery } from "@/utils/api/query/getBlogQueryKey";
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
-import { AspectRatio } from "@/components/ui/AspectRatio";
+import { formatDistance } from "date-fns";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 interface NewBlogSliderProps {
   body: PostsRequest;
 }
@@ -70,7 +69,7 @@ function Slide({ data }: { data: PostDto }) {
 
         <div
           id="info"
-          className="absolute w-full left-0 bottom-0 p-5 bg-slate-900/50 flex"
+          className="absolute w-full left-0 bottom-0 px-5 py-3 bg-slate-900/80 flex"
         >
           <div
             className={`w-1 mr-2`}
