@@ -8,10 +8,10 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent?: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+  searchParams,
+}: Props): Promise<Metadata> {
   // read route params
   const id = params.slug;
 
@@ -22,7 +22,7 @@ export async function generateMetadata(
   //const previousImages = (await parent)?.openGraph?.images || [];
   return {
     ...config.seo,
-    title: seo.metaTitle,
+    title: `${seo.metaTitle} | REFLEKTHOR`,
     description: seo.metaDescription,
     openGraph: {
       title: seo.metaTitle,

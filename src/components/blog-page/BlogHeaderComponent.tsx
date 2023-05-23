@@ -1,6 +1,7 @@
 import { FC } from "react";
 import Heading from "@/ui/Heading";
 import Image from "next/image";
+import { BlogContentCreatorLink } from "./BlogContentCreatorLink";
 
 interface BlogHeaderComponentProps {
   title: string;
@@ -18,9 +19,12 @@ const BlogHeaderComponent: FC<BlogHeaderComponentProps> = ({
   return (
     <div>
       <div className="flex gap-5 mb-2">
-        <small>{author}</small>
+        <small className="cursor-pointer">
+          <BlogContentCreatorLink author={author} />
+          {/* {author} */}
+        </small>
         <small className="font-bold">{publishDate}</small>
-        <small>15 seconds</small>
+        {/*  <small>15 seconds</small> */}
       </div>
 
       <Heading>{title}</Heading>

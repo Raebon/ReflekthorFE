@@ -49,7 +49,7 @@ const Blog: FC<BlogProps> = ({ slug }) => {
           <BlogContentComponent content={data?.content!} />
         </>
       ) : null}
-      <BlogCommentComponent />
+      {data && data?.postId && <BlogCommentComponent postId={data.postId} />}
     </div>
   );
 };

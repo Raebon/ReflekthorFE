@@ -43,6 +43,18 @@ const nextConfig = {
         source: "/blogs/:slug/seo",
         destination: `${process.env.API_URL}blogs/:slug/seo`,
       },
+      {
+        source: "/comments",
+        destination: `${process.env.API_URL}comments`,
+      },
+      {
+        source: "/comments/send",
+        destination: `${process.env.API_URL}comments/send`,
+      },
+      {
+        source: "/comments/:id",
+        destination: `${process.env.API_URL}comments/:id`,
+      },
     ];
   },
 };

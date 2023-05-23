@@ -74,7 +74,6 @@ export async function getBlogSeoBySlug(body: string) {
     const response: AxiosResponse<PostSeo> = await axios.get(
       `${process.env.API_URL}blogs/${body}/seo`
     );
-    console.log(response);
     return response.data;
   } catch (error) {
     // Handle the error
