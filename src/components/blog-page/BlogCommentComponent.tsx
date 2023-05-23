@@ -16,11 +16,19 @@ import { useForm } from "react-hook-form";
 import { TokenContext } from "../Providers";
 import { Button } from "../ui/Button";
 import { toast } from "../ui/Toast";
+import { formatDistance } from "date-fns";
+import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
 interface BlogCommentComponentProps {
   postId: number;
 }
 
-const CommentItem = ({ content }: { content: string }) => {
+const CommentItem = ({
+  content,
+  published,
+}: {
+  content: string;
+  published: string;
+}) => {
   return (
     <div className="flex gap-3 my-2">
       <div>
@@ -29,12 +37,13 @@ const CommentItem = ({ content }: { content: string }) => {
           <AvatarFallback>VC</AvatarFallback>
         </Avatar>
       </div>
-      <div className="grid gap-2">
+      <div className="grid gap-2 w-full">
         <div className="font-medium text-md border rounded-md p-2 tracking-tight">
           {content}
         </div>
-        <div className="flex justify-end gap-2">
+        <div className="flex justify-between gap-2">
           {/*  <CornerUpLeft className="w-4" /> */}
+          <small className="opacity-80">{published}</small>
           <div className="flex gap-1 items-center">
             <Heart className="w-4" />
             <small>13 likes</small>
@@ -62,7 +71,7 @@ const BlogCommentComponent: FC<BlogCommentComponentProps> = ({ postId }) => {
   });
   const [body, setBody] = useState<CommentsRequest>({
     skip: 0,
-    take: 10,
+    take: 5,
     postId: postId,
   });
   const [showCommentSection, setShowCommentSection] = useState<boolean>(false);
@@ -95,7 +104,7 @@ const BlogCommentComponent: FC<BlogCommentComponentProps> = ({ postId }) => {
   const handleShowMoreComments = (comentsNumber: number = 5) => {
     setBody((prev) => {
       return {
-        skip: prev.skip! + comentsNumber,
+        skip: prev.skip!,
         take: prev.take! + comentsNumber,
         postId: postId,
       };
@@ -126,7 +135,20 @@ const BlogCommentComponent: FC<BlogCommentComponentProps> = ({ postId }) => {
         <div className="grid gap-2">
           {data &&
             data.map((item, id) => {
-              return <CommentItem key={id} content={item.content as string} />;
+              return (
+                <CommentItem
+                  key={id}
+                  content={item.content as string}
+                  published={formatDistance(
+                    convertUtcToLocal(item.publishDate ?? new Date()),
+                    new Date(),
+                    {
+                      includeSeconds: true,
+                      addSuffix: true,
+                    }
+                  )}
+                />
+              );
             })}
           <Button variant="link" onClick={() => handleShowMoreComments(5)}>
             Show more comments

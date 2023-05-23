@@ -49,6 +49,7 @@ const Blog: FC<BlogProps> = ({ slug }) => {
           <BlogContentComponent content={data?.content!} />
         </>
       ) : null}
+      <hr className="mt-[3rem]" />
       {data && data?.postId && <BlogCommentComponent postId={data.postId} />}
     </div>
   );
