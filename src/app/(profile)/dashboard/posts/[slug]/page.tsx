@@ -1,4 +1,5 @@
 import Blog from "@/components/blog-page/Blog";
+import PostCreateForm from "@/components/dashboard-page/PostCreateForm";
 import { config } from "@/config";
 import { getBlogSeoBySlug } from "@/utils/api/query/getBlogQueryKey";
 import type { Metadata, ResolvingMetadata } from "next";
@@ -8,7 +9,7 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export async function generateMetadata({
+/* export async function generateMetadata({
   params,
   searchParams,
 }: Props): Promise<Metadata> {
@@ -30,8 +31,8 @@ export async function generateMetadata({
       //images: ["/some-specific-page-image.jpg", ...previousImages],
     },
   };
-}
+} */
 
 export default function Page({ params }: Props) {
-  return <Blog slug={params.slug} />;
+  return <PostCreateForm />;
 }

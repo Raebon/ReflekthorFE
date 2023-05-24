@@ -79,6 +79,7 @@ const BlogCommentComponent: FC<BlogCommentComponentProps> = ({ postId }) => {
   const createComment = useCreateCommentMutation();
 
   const submitComment = (e: CreateCommentRequest) => {
+    if (!token) return null;
     let payload: CreateCommentBody = {
       body: e,
       token: token,
@@ -112,6 +113,7 @@ const BlogCommentComponent: FC<BlogCommentComponentProps> = ({ postId }) => {
   };
 
   const toggleCommentSection = useCallback(() => {
+    if (!token) return null;
     setShowCommentSection((prev) => !prev);
   }, []);
 
@@ -125,7 +127,11 @@ const BlogCommentComponent: FC<BlogCommentComponentProps> = ({ postId }) => {
         className="flex justify-center p-3 bg-slate-900 text-white hover:bg-slate-800 dark:bg-slate-200 dark:text-slate-900 dark:hover:bg-slate-100 cursor-pointer my-2"
         onClick={toggleCommentSection}
       >
-        {showCommentSection ? "Hide comments section" : "Show comments section"}
+        {showCommentSection
+          ? "Hide comments section"
+          : token
+          ? "Show comments section"
+          : "Log in and leave a comment"}
       </div>
       <div className={commentSectionCss}>
         <Textarea {...register("content")} />

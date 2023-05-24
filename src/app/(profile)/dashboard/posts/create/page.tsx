@@ -1,4 +1,4 @@
-import CreatePostForm from "@/components/dashboard-page/CreatePostForm";
+import PostCreateForm from "@/components/dashboard-page/PostCreateForm";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default async function CreatePost() {
   return (
     <section>
-      <CreatePostForm />
+      <PostCreateForm />
     </section>
   );
 }

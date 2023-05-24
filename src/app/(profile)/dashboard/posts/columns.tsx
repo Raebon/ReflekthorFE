@@ -1,4 +1,5 @@
 import PostDeleteDialog from "@/components/dashboard-page/PostDeleteDialog";
+import PostEditButton from "@/components/dashboard-page/PostEditButton";
 import { PostDto } from "@/types/reflektor-api-service";
 import { formatDatetime } from "@/utils/formatDatetime";
 import { ColumnDef } from "@tanstack/react-table";
@@ -52,6 +53,7 @@ export const columns: ColumnDef<PostDto>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex gap-1 justify-end">
+          <PostEditButton postId={row.original.postId ?? 0} />
           <PostDeleteDialog row={row} />
         </div>
       );

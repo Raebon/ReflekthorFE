@@ -20,7 +20,7 @@ import { TokenContext } from "@/components/Providers";
 
 interface CreatePostFormProps {}
 
-const CreatePostForm: FC<CreatePostFormProps> = ({}) => {
+const PostCreateForm: FC<CreatePostFormProps> = ({}) => {
   const token = React.useContext(TokenContext);
   const {
     register,
@@ -252,4 +252,4 @@ const CreatePostForm: FC<CreatePostFormProps> = ({}) => {
   );
 };
 
-export default CreatePostForm;
+export default PostCreateForm;
