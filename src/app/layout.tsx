@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import NextTopLoader from "nextjs-toploader";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -45,19 +46,19 @@ export default async function RootLayout({
       <meta name="msapplication-TileColor" content="#000000"></meta>
       <meta name="theme-color" content="#ffffff"></meta>
 
-      <script
-        async
+      <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-6QEQ77J0HN"
-      ></script>
-      <script
-        dangerouslySetInnerHTML={{
-          __html: ` window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+        strategy="afterInteractive"
+      ></Script>
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
 
-  gtag('config', 'G-6QEQ77J0HN');`,
-        }}
-      />
+          gtag('config', 'G-6QEQ77J0HN');
+        `}
+      </Script>
       <body className="min-h-screen bg-slate-50 dark:bg-slate-900 antialisased text-slate-900 dark:text-slate-100">
         <Providers token={session?.accessToken?.accessToken ?? ""}>
           <NextTopLoader
