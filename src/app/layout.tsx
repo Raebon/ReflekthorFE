@@ -44,6 +44,20 @@ export default async function RootLayout({
       ></link>
       <meta name="msapplication-TileColor" content="#000000"></meta>
       <meta name="theme-color" content="#ffffff"></meta>
+
+      <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-6QEQ77J0HN"
+      ></script>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: ` window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-6QEQ77J0HN');`,
+        }}
+      />
       <body className="min-h-screen bg-slate-50 dark:bg-slate-900 antialisased text-slate-900 dark:text-slate-100">
         <Providers token={session?.accessToken?.accessToken ?? ""}>
           <NextTopLoader
