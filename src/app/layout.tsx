@@ -9,7 +9,7 @@ import NextTopLoader from "nextjs-toploader";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import Script from "next/script";
-
+import { Analytics } from "@vercel/analytics/react";
 const inter = Inter({ subsets: ["latin"] });
 
 export default async function RootLayout({
@@ -46,8 +46,8 @@ export default async function RootLayout({
       <meta name="msapplication-TileColor" content="#000000"></meta>
       <meta name="theme-color" content="#ffffff"></meta>
 
-      <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-6QEQ77J0HN"
+      {/*  <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS}`}
         strategy="afterInteractive"
       ></Script>
       <Script id="google-analytics" strategy="afterInteractive">
@@ -56,9 +56,9 @@ export default async function RootLayout({
           function gtag(){window.dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', 'G-6QEQ77J0HN');
+          gtag('config', ${process.env.GOOGLE_ANALYTICS});
         `}
-      </Script>
+      </Script> */}
       <body className="min-h-screen bg-slate-50 dark:bg-slate-900 antialisased text-slate-900 dark:text-slate-100">
         <Providers token={session?.accessToken?.accessToken ?? ""}>
           <NextTopLoader
@@ -72,6 +72,7 @@ export default async function RootLayout({
           <main>{children}</main>
           <Footer />
         </Providers>
+        <Analytics />
         {/* Allow for more height on mobile devices */}
         <div className="h-40 md:hidden" />
       </body>
