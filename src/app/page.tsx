@@ -67,8 +67,8 @@ const mostReadBlogBodyRequest = {
 
 export default async function Home() {
   const initialSliderData = await getNewBlogs(blogSliderBodyRequest);
-  const initialGridData = await getNewBlogs(blogGridBodyRequest);
-  const initialMostReadBlogData = await getNewBlogs(mostReadBlogBodyRequest);
+  /*   const initialGridData = await getNewBlogs(blogGridBodyRequest);
+  const initialMostReadBlogData = await getNewBlogs(mostReadBlogBodyRequest); */
   const initialCategoriesData = await getCategories();
 
   return (
@@ -84,14 +84,14 @@ export default async function Home() {
           <div className="col-span-3 md:col-span-2 my-2">
             <h5 className="my-3 text-3xl font-semibold">Latest articles</h5>
             <NewBlogsGrid
-              initialData={initialGridData}
+              initialData={initialSliderData}
               body={blogGridBodyRequest}
             />
           </div>
           <div className="w-full my-2">
             <h5 className="my-3 text-3xl font-semibold">Most read articles</h5>
             <MostReadBlog
-              initialData={initialMostReadBlogData}
+              initialData={initialSliderData}
               body={mostReadBlogBodyRequest}
             />
           </div>

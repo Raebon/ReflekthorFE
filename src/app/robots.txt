@@ -1,4 +1,4 @@
 User-Agent: *
 Allow: /
-Disallow: /private/
+Disallow: /dashboard/ /profile/ /settings/
 Sitemap: https://www.reflekthor.com/sitemap.xml
