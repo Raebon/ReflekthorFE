@@ -23,6 +23,12 @@ export const getCategoriesSetupQuery = () => {
   return getCategories();
 };
 
-export const useGetCategoriesSetupQuery = (): UseQueryResult<CategoryDto[]> => {
-  return useQuery(getCategoriesQueryKey(), () => getCategoriesSetupQuery());
+export const useGetCategoriesSetupQuery = (
+  initialData?: CategoryDto[]
+): UseQueryResult<CategoryDto[]> => {
+  return useQuery({
+    queryKey: getCategoriesQueryKey(),
+    queryFn: () => getCategoriesSetupQuery(),
+    initialData: initialData,
+  });
 };

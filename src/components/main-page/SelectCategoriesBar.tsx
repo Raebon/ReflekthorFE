@@ -1,9 +1,15 @@
 "use client";
+import { CategoryDto } from "@/types/reflektor-api-service";
 import { useGetCategoriesSetupQuery } from "@/utils/api/query/getCategoriesQueryKey";
 import Link from "next/link";
+import { FC } from "react";
 
-const SelectCategoriesBar = () => {
-  const { data } = useGetCategoriesSetupQuery();
+interface SelectCategoriesBarProps {
+  initialData: CategoryDto[];
+}
+
+const SelectCategoriesBar: FC<SelectCategoriesBarProps> = ({ initialData }) => {
+  const { data } = useGetCategoriesSetupQuery(initialData);
 
   return (
     <div className="flex gap-2 flex-wrap">

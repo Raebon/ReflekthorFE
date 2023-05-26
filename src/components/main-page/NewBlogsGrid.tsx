@@ -10,10 +10,11 @@ import Link from "next/link";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 interface BlogGridProps {
   body: PostsRequest;
+  initialData: PostDto[];
 }
 
-const NewBlogsGrid: FC<BlogGridProps> = ({ body }) => {
-  const { data, isLoading } = useGetBlogsSetupQuery(body);
+const NewBlogsGrid: FC<BlogGridProps> = ({ body, initialData }) => {
+  const { data, isLoading } = useGetBlogsSetupQuery(body, initialData);
   const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (

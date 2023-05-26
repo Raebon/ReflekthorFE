@@ -15,10 +15,11 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 interface NewBlogSliderProps {
   body: PostsRequest;
+  initialData: PostDto[];
 }
 
-const NewBlogSlider: FC<NewBlogSliderProps> = ({ body }) => {
-  const { data, isLoading } = useGetBlogsSetupQuery(body);
+const NewBlogSlider: FC<NewBlogSliderProps> = ({ body, initialData }) => {
+  const { data, isLoading } = useGetBlogsSetupQuery(body, initialData);
   SwiperCore.use([Autoplay]);
   return (
     <div className="border-b py-2 dark:border-slate-700 w-full">

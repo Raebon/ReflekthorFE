@@ -1,7 +1,9 @@
 import Blog from "@/components/blog-page/Blog";
 import { config } from "@/config";
+import { PostDto } from "@/types/reflektor-api-service";
 import { getBlogSeoBySlug } from "@/utils/api/query/getBlogQueryKey";
-import type { Metadata, ResolvingMetadata } from "next";
+import axios, { AxiosResponse } from "axios";
+import type { Metadata } from "next";
 
 type Props = {
   params: { slug: string };
@@ -17,7 +19,6 @@ export async function generateMetadata({
 
   // fetch data
   const seo = await getBlogSeoBySlug(id);
-  console.log(seo);
   // optionally access and extend (rather than replace) parent metadata
   //const previousImages = (await parent)?.openGraph?.images || [];
   return {
@@ -32,6 +33,19 @@ export async function generateMetadata({
   };
 }
 
-export default function Page({ params }: Props) {
-  return <Blog slug={params.slug} />;
+async function getBlogBySlug(body: string) {
+  try {
+    const response: AxiosResponse<PostDto> = await axios.get(
+      `${process.env.API_URL}blogs/${body}`
+    );
+    return response.data;
+  } catch (error) {
+    // Handle the error
+    throw error;
+  }
+}
+
+export default async function Page({ params }: Props) {
+  const initialData = await getBlogBySlug(params.slug);
+  return <Blog slug={params.slug} initialData={initialData} />;
 }

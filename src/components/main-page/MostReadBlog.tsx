@@ -1,20 +1,20 @@
 "use client";
-import { FC } from "react";
-import Image from "next/image";
 import { PostDto, PostsRequest } from "@/types/reflektor-api-service";
-import { useGetBlogsSetupQuery } from "@/utils/api/query/getBlogQueryKey";
-import { formatDistance, subDays } from "date-fns";
 import { Skeleton } from "@/ui/Skeleton";
+import { useGetBlogsSetupQuery } from "@/utils/api/query/getBlogQueryKey";
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
+import { formatDistance } from "date-fns";
+import Image from "next/image";
 import Link from "next/link";
-import { AspectRatio } from "@radix-ui/react-aspect-ratio";
+import { FC } from "react";
 
 interface MostReadBlogProps {
   body: PostsRequest;
+  initialData: PostDto[];
 }
 
-const MostReadBlog: FC<MostReadBlogProps> = ({ body }) => {
-  const { data, isLoading } = useGetBlogsSetupQuery(body);
+const MostReadBlog: FC<MostReadBlogProps> = ({ body, initialData }) => {
+  const { data, isLoading } = useGetBlogsSetupQuery(body, initialData);
   const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8];
   return (
     <section className="grid gap-5">

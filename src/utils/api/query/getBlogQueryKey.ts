@@ -1,7 +1,6 @@
 import { PostsRequest, PostDto, PostSeo } from "@/types/reflektor-api-service";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import axios, { AxiosResponse } from "axios";
-
 /* Get blogs */
 export const getBlogQueryKeyPrefix = "blog-posts";
 
@@ -28,9 +27,17 @@ export const getBlogsSetupQuery = (body: PostsRequest) => {
 };
 
 export const useGetBlogsSetupQuery = (
-  body: PostsRequest
+  body: PostsRequest,
+  initialData?: PostDto[]
 ): UseQueryResult<PostDto[]> => {
-  return useQuery(getBlogsQueryKey(body), () => getBlogsSetupQuery(body));
+  return useQuery(
+    {
+      queryKey: getBlogsQueryKey(body),
+      queryFn: () => getBlogsSetupQuery(body),
+      initialData: initialData,
+    }
+    // getBlogsQueryKey(body), () => getBlogsSetupQuery(body)
+  );
 };
 
 /* Get blog object from slug */
@@ -55,17 +62,17 @@ export const getBlogBySlugSetupQuery = (body: string) => {
 };
 
 export const useGetBlogBySlugSetupQuery = (
-  body: string
+  body: string,
+  initialData: PostDto
 ): UseQueryResult<PostDto> => {
-  return useQuery(
-    getBlogBySlugQueryKey(body),
-    () => getBlogBySlugSetupQuery(body),
-    {
-      retryOnMount: false,
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-    }
-  );
+  return useQuery({
+    queryKey: getBlogBySlugQueryKey(body),
+    queryFn: () => getBlogBySlugSetupQuery(body),
+    retryOnMount: false,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    initialData: initialData,
+  });
 };
 
 //get seo by slug

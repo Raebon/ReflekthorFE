@@ -7,13 +7,15 @@ import BlogContentComponent from "./BlogContentComponent";
 import { Skeleton } from "@/ui/Skeleton";
 import BlogTopRedirectBanner from "./BlogTopRedirectBanner";
 import BlogCommentComponent from "./BlogCommentComponent";
+import { PostDto } from "@/types/reflektor-api-service";
 
 interface BlogProps {
   slug: string;
+  initialData: PostDto;
 }
 
-const Blog: FC<BlogProps> = ({ slug }) => {
-  const { data, isLoading } = useGetBlogBySlugSetupQuery(slug);
+const Blog: FC<BlogProps> = ({ slug, initialData }) => {
+  const { data, isLoading } = useGetBlogBySlugSetupQuery(slug, initialData);
   return (
     <div>
       <BlogTopRedirectBanner />

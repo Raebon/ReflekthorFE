@@ -20,6 +20,8 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
   return (
     <html lang="en" className={cn("antialiased", inter.className)}>
+      <meta name="msapplication-TileColor" content="#000000"></meta>
+      <meta name="theme-color" content="#ffffff"></meta>
       <link
         rel="apple-touch-icon"
         sizes="180x180"
@@ -43,9 +45,6 @@ export default async function RootLayout({
         href="/safari-pinned-tab.svg"
         color="#5bbad5"
       ></link>
-      <meta name="msapplication-TileColor" content="#000000"></meta>
-      <meta name="theme-color" content="#ffffff"></meta>
-
       {/*  <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS}`}
         strategy="afterInteractive"
