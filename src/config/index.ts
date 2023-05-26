@@ -4,9 +4,9 @@ export const config = {
   socials: {
     facebook: "https://www.facebook.com/",
     twitch: "https://www.twitch.com/",
-    twitter: "https://www.twitter.com/",
-    instagram: "https://www.instagram.com/",
-    youtube: "https://www.youtube.com/",
+    twitter: "https://www.twitter.com/@reflekthor57059",
+    instagram: "https://www.instagram.com/reflekthor.web",
+    youtube: "https://www.youtube.com/@Reflekthor.",
   },
   seo: {
     //doplnit
