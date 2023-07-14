@@ -67,8 +67,6 @@ const mostReadBlogBodyRequest = {
 
 export default async function Home() {
   const initialSliderData = await getNewBlogs(blogSliderBodyRequest);
-  /*   const initialGridData = await getNewBlogs(blogGridBodyRequest);
-  const initialMostReadBlogData = await getNewBlogs(mostReadBlogBodyRequest); */
   const initialCategoriesData = await getCategories();
 
   return (

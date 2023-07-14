@@ -37,7 +37,9 @@ const BlogHeaderComponent: FC<BlogHeaderComponentProps> = ({
         }
         width={1440}
         height={1080}
-        alt={title}
+        sizes="(max-width: 768px) 100vh, (max-width: 1200px) 50vh, 33vh"
+        alt={title!}
+        loading="eager"
       />
     </div>
   );

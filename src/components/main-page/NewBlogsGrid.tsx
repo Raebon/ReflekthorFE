@@ -59,7 +59,9 @@ function BlogItem({ data }: { data: PostDto }) {
         }
         width={600}
         height={400}
+        sizes="(max-width: 768px) 100vh, (max-width: 1200px) 50vh, 33vh"
         alt={title!}
+        loading="eager"
       />
       <div className="leading-5 tracking-tight flex flex-col mt-2">
         <span className="text-sm font-semibold">{title}</span>

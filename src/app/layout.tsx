@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 import NextTopLoader from "nextjs-toploader";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
-import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
 const inter = Inter({ subsets: ["latin"] });
 

@@ -63,7 +63,9 @@ function Slide({ data }: { data: PostDto }) {
           }
           width={1440}
           height={1080}
-          alt="test"
+          sizes="(max-width: 768px) 100vh, (max-width: 1200px) 50vh, 33vh"
+          alt={title!}
+          loading="eager"
         />
         {/*      </AspectRatio>
         </div> */}

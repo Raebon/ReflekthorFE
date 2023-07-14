@@ -64,7 +64,9 @@ function BlogItem({ data }: { data: PostDto }) {
         src={`https://reflecthorstorage.blob.core.windows.net/images/${imageSmallPath}`}
         width={115}
         height={153}
-        alt="test"
+        sizes="(max-width: 768px) 100vh, (max-width: 1200px) 50vh, 33vh"
+        alt={title!}
+        loading="eager"
       />
 
       <div className="leading-5 tracking-tight flex flex-col gap-2 py-1">
