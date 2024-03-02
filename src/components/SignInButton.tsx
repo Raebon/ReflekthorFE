@@ -17,9 +17,9 @@ import { Label } from "@/ui/Label";
 import { useForm, FieldValues } from "react-hook-form";
 //import { toast } from "./toast";
 
-interface SignInButtonProps {}
+interface SignInButtonProps { }
 
-const SignInButton: FC<SignInButtonProps> = ({}) => {
+const SignInButton: FC<SignInButtonProps> = ({ }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const {
     register,
