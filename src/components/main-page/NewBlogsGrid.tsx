@@ -54,7 +54,7 @@ function BlogItem({ data }: { data: PostDto }) {
       <Image
         className="w-full h-[188px]"
         src={
-          `https://reflecthorstorage.blob.core.windows.net/images/${imageMediumPath}` ||
+          `https://reflekthorstorage.blob.core.windows.net/images/${imageMediumPath}` ||
           "/"
         }
         width={600}

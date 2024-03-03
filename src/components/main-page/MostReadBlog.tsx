@@ -61,7 +61,7 @@ function BlogItem({ data }: { data: PostDto }) {
     <Link className="flex gap-3" href={`/posts/${slug}`}>
       <Image
         className="object-cover "
-        src={`https://reflecthorstorage.blob.core.windows.net/images/${imageSmallPath}`}
+        src={`https://reflekthorstorage.blob.core.windows.net/images/${imageSmallPath}`}
         width={115}
         height={153}
         sizes="(max-width: 768px) 100vh, (max-width: 1200px) 50vh, 33vh"

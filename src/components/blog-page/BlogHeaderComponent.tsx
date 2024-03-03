@@ -32,7 +32,7 @@ const BlogHeaderComponent: FC<BlogHeaderComponentProps> = ({
       <Image
         className="object-fill max-h-[350px] max-w-[976px] w-full my-5"
         src={
-          `https://reflecthorstorage.blob.core.windows.net/images/${imagePath}` ||
+          `https://reflekthorstorage.blob.core.windows.net/images/${imagePath}` ||
           "/"
         }
         width={1440}

@@ -58,7 +58,7 @@ function Slide({ data }: { data: PostDto }) {
         <Image
           className="object-cover max-h-[350px] w-[976px]"
           src={
-            `https://reflecthorstorage.blob.core.windows.net/images/${imagePath}` ||
+            `https://reflekthorstorage.blob.core.windows.net/images/${imagePath}` ||
             "/"
           }
           width={1440}
